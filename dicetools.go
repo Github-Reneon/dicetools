@@ -1,4 +1,4 @@
-package dicetools
+package github.com/Github-Reneon/dicetools
 
 import (
 	"fmt"
