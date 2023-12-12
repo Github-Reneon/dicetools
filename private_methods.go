@@ -5,10 +5,10 @@ import (
 	"regexp"
 )
 
-func IsCorrectNotation(command *string) bool {
+func isCorrectNotation(command *string) bool {
 
 	// Gen regex in format to check all is correct (e.g. 1d100+10)
-	reNotation, err := regexp.Compile(`^\d+d\d+(\+\d+)?(\-\d+)?$`)
+	reNotation, err := regexp.Compile(`^([1-9]\d+d[1-9]\d+)*(\+\d+|\-\d+)*$`)
 
 	// Check for error
 	if err != nil {
@@ -20,7 +20,7 @@ func IsCorrectNotation(command *string) bool {
 	return reNotation.MatchString(*command)
 }
 
-func ReceiveRollResult(command *string) int {
+func receiveRollResult(command *string) int {
 	/*
 		1. Split the string into the three possible clauses
 			a. Split by +
@@ -29,18 +29,18 @@ func ReceiveRollResult(command *string) int {
 		3. Add the second clause
 		4. Subtract the third clause
 	*/
-	return 0
-	//if strings.Contains(*command, '+')
-}
 
-func RollNotation(command string) int {
-	// Check that the format is correct
-	if IsCorrectNotation(&command) {
-		// Return the rolled result
-		return ReceiveRollResult(&command)
-	} else {
-		// Error
-		fmt.Println("Incorrect notation: ", command)
-		return 0
+	pattern := `[\+-]`
+	total := 0
+
+	reClauses, err := regexp.Compile(pattern)
+	if err != nil {
+		panic(err)
 	}
+
+	result := reClauses.Split(*command, -1)
+
+	fmt.Println(result)
+
+	return total
 }
