@@ -34,9 +34,19 @@ func TestModifiers(t *testing.T) {
 
 func TestOutput(t *testing.T) {
 	export := 0
-	export = dt.RollNotation("1d20+1-1-20")
-	if export > 0 {
-		t.Error("Not adding up correctly")
+	export = dt.RollNotation("3d6+1-10-20")
+	if export != -29 {
+		t.Error("Not adding up correctly", export)
+	} else {
+		t.Log(export)
 	}
 
+}
+
+func TestIsCorrect(t *testing.T) {
+	if dt.CheckIsCorrectNotation("1d20+3d6+3-2") == false {
+		t.Error("Reads as incorrect")
+	} else {
+		t.Log("Reads as correct!!!")
+	}
 }

@@ -15,3 +15,7 @@ func RollNotation(command string) int {
 		return -1
 	}
 }
+
+func CheckIsCorrectNotation(command string) bool {
+	return isCorrectNotation(&command)
+}
