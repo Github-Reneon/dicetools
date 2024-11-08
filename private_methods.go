@@ -25,10 +25,9 @@ func isCorrectNotation(command *string) bool {
 	return reNotation.MatchString(*command)
 }
 
-func receiveRollResult(command *string) int {
+func receiveRollResult(command *string, r *rand.Rand) int {
 	pattern := `[\+\-]`
 	total := 0
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	reClauses, err := regexp.Compile(pattern)
 	if err != nil {
